@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1535815758 source:c:\users\alumno\desktop\calcu1lel\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"math.h"
+
+1535816048 c:\users\alumno\desktop\calcu1lel\math.h
+
+1535817657 source:c:\users\alumno\desktop\sabado2\calcu1lel\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"math.h"
+
+1535816658 c:\users\alumno\desktop\sabado2\calcu1lel\math.h
+
+1536069453 source:c:\users\leona\desktop\sabados-de-flojera-master\sabado2\calcu1lel\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"math.h"
+	"math.c"
+
+1536065415 c:\users\leona\desktop\sabados-de-flojera-master\sabado2\calcu1lel\math.h
+
+1536065415 c:\users\leona\desktop\sabados-de-flojera-master\sabado2\calcu1lel\math.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1536105786 source:c:\users\leona\desktop\tp1 calculadora\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"math.h"
+	"math.c"
+
+1536065415 c:\users\leona\desktop\tp1 calculadora\math.h
+
+1536065415 c:\users\leona\desktop\tp1 calculadora\math.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
