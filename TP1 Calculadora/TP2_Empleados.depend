@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1538620153 source:c:\users\leona\desktop\codeweas\tp2_empleados\main.c
+
+1538619575 c:\users\leona\desktop\codeweas\tp2_empleados\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayEmployees.h"
+	"utn.h"
+	"utn.c"
+
+1538618144 c:\users\leona\desktop\codeweas\tp2_empleados\arrayemployees.h
+
+1538611585 c:\users\leona\desktop\codeweas\tp2_empleados\utn.h
+
+1538609092 c:\users\leona\desktop\codeweas\tp2_empleados\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
