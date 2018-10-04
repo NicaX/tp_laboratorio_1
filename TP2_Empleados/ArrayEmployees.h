@@ -166,3 +166,4 @@ int findEmployeeById(eEmpleado arrayEmpleados[],int cantidad,int id);
 
 void printSalarios(eEmpleado arrayEmpleados[], int cantidad);
 #endif // ARRAYEMPLOYEES_H_INCLUDED
+

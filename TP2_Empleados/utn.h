@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 #ifndef UTN_H_INCLUDED
 #define UTN_H_INCLUDED
 
@@ -7,7 +11,7 @@
  * \return El número ingresado por el usuario
  *
  */
-(char* mensaje);
+ int getInt(char* mensaje);
 
 /**
  * \brief Verifica si el valor recibido es numérico aceptando flotantes
