@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
+#include <string.h>
 #include "ArrayEmployees.h"
 #include "ArrayEmployees.c"
-#include "utn.h"
-#include "utn.c"
 
 int main()
 {
-
-
     eEmpleado listaEmpleadosMain[MAX_EMPLEADOS];
     initEmployees(listaEmpleadosMain,MAX_EMPLEADOS);
     int opcion;
@@ -66,8 +64,8 @@ int main()
                 printf("\nError: opcion no valida.\n");
                 break;
         }
-        system("pause"); //pausa la consola
-        system("cls");  //limpia
-    }while(opcion!=5);
-    return 0;
+        system("pause");
+        system("cls");
+    }
+    while(opcion!=5);
 }

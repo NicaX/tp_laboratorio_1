@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <string.h>
-#include "ArrayEmployees.h"
 #include "utn.h"
 #include "utn.c"
-
 void initEmployees(eEmpleado arrayEmpleados[],int cantidad)
 {
     int i;
@@ -154,8 +153,8 @@ int modificarEmployee(eEmpleado arrayEmpleados[],int cantidad)
                 system("cls");
                 printEmployees(arrayEmpleados, cantidad);
 
-                printf("Que campo quiere modificar?\n");
-                printf("1_Nombre: %s\n2_Apellido: %s\n3_Salario: %f\n4_Sector: %d\n",arrayEmpleados[indice].nombre,
+                printf("\nQue campo quiere modificar?\n");
+                printf("\n1_Nombre: %s\n2_Apellido: %s\n3_Salario: %f\n4_Sector: %d\n\nElija una opcion :",arrayEmpleados[indice].nombre,
                 arrayEmpleados[indice].apellido,arrayEmpleados[indice].salario,arrayEmpleados[indice].sector);
                 fflush(stdin);
                 scanf("%d",&opcion);
@@ -164,22 +163,22 @@ int modificarEmployee(eEmpleado arrayEmpleados[],int cantidad)
                 switch(opcion)
                 {
                     case 1:
-                        printEmployees(arrayEmpleados, cantidad);
+
                         getValidString(" Ingrese nuevo nombre: "," Error, ingrese nuevamente:", auxNewName);
                         strcpy(arrayEmpleados[indice].nombre, auxNewName);
                         break;
                     case 2:
-                        printEmployees(arrayEmpleados, cantidad);
+
                         getValidString(" Ingrese nuevo apellido: "," Error, ingrese nuevamente:", auxNewLastName);
                         strcpy(arrayEmpleados[indice].apellido, auxNewLastName);
                         break;
                     case 3:
-                        printEmployees(arrayEmpleados, cantidad);
+
                         auxNewSalary=getValidFloat(" Ingrese nuevo salario: \n"," Error, el salario no es valido.\n", 0, 1000000);
                         arrayEmpleados[indice].salario=auxNewSalary;
                         break;
                     case 4:
-                        printEmployees(arrayEmpleados, cantidad);
+
                         auxNewSector=getValidInt(" Ingrese nuevo sector: \n"," Error, el sector no es valido.\n", 0, 200);
                         arrayEmpleados[indice].sector=auxNewSector;
                         break;
@@ -189,7 +188,7 @@ int modificarEmployee(eEmpleado arrayEmpleados[],int cantidad)
                         system("cls");
                         break;
                 }
-                printf(" ¿Desea continuar? s/n \n :");
+                printf("Desea continuar? s/n \n :");
                 fflush(stdin);
                 scanf("%c",&opcion2);
                 system("pause");
@@ -231,6 +230,8 @@ int idEmployee(eEmpleado arrayEmpleados[],int indice,int cantidad)
     return retorno;
 }
 
+
+
 int printEmployees(eEmpleado arrayEmpleados[],int cantidad)
 {
     int i;
@@ -242,31 +243,19 @@ int printEmployees(eEmpleado arrayEmpleados[],int cantidad)
         {
             if(arrayEmpleados[i].isEmpty == 0)
             {
-                printEmployee(arrayEmpleados,i);
+                printf ("%5d %20s %20s %10.2f %3d\n", arrayEmpleados[i].id, arrayEmpleados[i].nombre, arrayEmpleados[i].apellido, arrayEmpleados[i].salario, arrayEmpleados[i].sector);
                 retorno=0;
             }
         }
-
     }
     return retorno;
 }
 
-int printEmployee(eEmpleado arrayEmpleados[], int cantidad)
-{
-    int retorno=-1;
-    if(arrayEmpleados!=NULL)
-    {
-        if(arrayEmpleados[cantidad].isEmpty == 0)
-        {
-            printf ("%5d %20s %20s %10.2f %3d\n", arrayEmpleados[cantidad].id, arrayEmpleados[cantidad].nombre, arrayEmpleados[cantidad].apellido, arrayEmpleados[cantidad].salario, arrayEmpleados[cantidad].sector);
-            retorno=0;
-        }
-    return retorno;
-}
-void sortEmployees(eEmpleado arrayEmpleados[],int cantidad)
+int sortEmployees(eEmpleado arrayEmpleados[],int cantidad)
 {
     int i;
     int comparacion;
+    int retorno=-1;
     for(i=0;i<cantidad;i++)
     {
         if(arrayEmpleados[i].isEmpty == 0)
@@ -283,9 +272,10 @@ void sortEmployees(eEmpleado arrayEmpleados[],int cantidad)
                 }
             }
         }
+        retorno=0;
     }
 
-
+    return retorno;
 }
 
 void intercambio(eEmpleado arrayEmpleados[],int indice1,int indice2)

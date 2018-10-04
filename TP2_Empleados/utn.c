@@ -4,6 +4,7 @@
 #include <string.h>
 
 
+
 int getInt(char* mensaje)
 {
     int auxiliar;
@@ -13,7 +14,7 @@ int getInt(char* mensaje)
     return auxiliar;
 }
 
-int esNumericoFlotante(char str[])
+int isFloat(char str[])
 {
     int i=0;
     int cantidadPuntos=0;
@@ -33,7 +34,7 @@ int esNumericoFlotante(char str[])
     return 1;
 }
 
-int esNumerico(char str[])
+int isNumber(char str[])
 {
     int i=0;
     while(str[i] != '\0')
@@ -50,7 +51,7 @@ int getStringNumeros(char mensaje[],char input[])
 {
     char aux[256];
     getString(mensaje,aux);
-    if(esNumerico(aux))
+    if(isNumber(aux))
     {
         strcpy(input,aux);
         return 1;
@@ -58,11 +59,11 @@ int getStringNumeros(char mensaje[],char input[])
     return 0;
 }
 
-int getStringNumerosFlotantes(char mensaje[],char input[])
+int getFloatString(char mensaje[],char input[])
 {
     char aux[256];
     getString(mensaje,aux);
-    if(esNumericoFlotante(aux))
+    if(isFloat(aux))
     {
         strcpy(input,aux);
         return 1;
@@ -103,7 +104,7 @@ void cleanStdin(void)
     while (c != '\n' && c != EOF);
 }
 
-int esSoloLetras(char str[])
+int onlyLetters(char str[])
 {
     int i=0;
     while(str[i] != '\0')
@@ -126,7 +127,7 @@ int getStringLetras(char mensaje[],char input[])
 {
     char aux[256];
     getString(mensaje,aux);
-    if(esSoloLetras(aux))
+    if(onlyLetters(aux))
     {
         strcpy(input,aux);
         return 1;
@@ -156,7 +157,7 @@ int getValidFloat(char requestMessage[],char errorMessage[], int lowLimit, int h
     float auxFloat;
     while(1)
     {
-        if (!getStringNumerosFlotantes(requestMessage, auxStr))
+        if (!getFloatString(requestMessage, auxStr))
         {
             printf ("%s\n",errorMessage);
             continue;

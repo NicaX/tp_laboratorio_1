@@ -1,7 +1,7 @@
 #ifndef ARRAYEMPLOYEES_H_INCLUDED
 #define ARRAYEMPLOYEES_H_INCLUDED
 #define MAX_EMPLEADOS 1000
-
+#include "utn.h"
 typedef struct{
 int id;
 char nombre[51];
@@ -29,7 +29,7 @@ void initEmployees(eEmpleado arrayEmpleados[],int cantidad);
 
 void menuPrincipal();
 
-/** \brief Da de alta empleados hasta que ocurra un error
+/** \brief Da de alta un empleado si encuentra espacio
  *
  * \param arrayEmpleados[] eEmpleado   Array de empleados
  * \param cantidad int  Cantidad de empleados del array
@@ -66,16 +66,16 @@ int buscarLibre(eEmpleado arrayEmpleados[],int cantidad);
  */
 int printEmployees(eEmpleado arrayEmpleados[],int cantidad);
 
-/** \brief Imprime una lista ordenada por apellido y sector, y un breve informe sobre los salarios
+/** \brief Imprime una lista ordenada por apellido y sector
  *
  * \param arrayEmpleados eEmpleado Array de empleados
  * \param cantidad int  Cantidad de empleados del array
  * \return void
  *
  */
-void sortEmployees(eEmpleado arrayEmpleados[],int cantidad);
+int sortEmployees(eEmpleado arrayEmpleados[],int cantidad);
 
-/** \brief  Muestra la lista de empleados y da de baja uno mediante su id
+/** \brief  Muestra la lista de empleados y mediande el id se permite la baja
  *
  * \param arrayEmpleados[] eEmpleado   Array de empleados
  * \param cantidad int  Cantidad de empleados del array
@@ -164,6 +164,13 @@ int findEmployeeById(eEmpleado arrayEmpleados[],int cantidad,int id);
 
 
 
+/** \brief Imprime la suma de los salarios y el promedio
+ *
+ * \param arrayEmpleados[] eEmpleado Array de empleados
+ * \param cantidad int  Cantidad de empleados
+ * \return void
+ *
+ */
 void printSalarios(eEmpleado arrayEmpleados[], int cantidad);
 #endif // ARRAYEMPLOYEES_H_INCLUDED
 

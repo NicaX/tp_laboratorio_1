@@ -6,20 +6,20 @@
 #define UTN_H_INCLUDED
 
 /**
- * \brief Solicita un número al usuario y devuelve el resultado
+ * \brief Pide un número al usuario y devuelve el resultado
  * \param mensaje Es el mensaje a ser mostrado
- * \return El número ingresado por el usuario
+ * \return El número ingresado
  *
  */
  int getInt(char* mensaje);
 
 /**
- * \brief Verifica si el valor recibido es numérico aceptando flotantes
+ * \brief Verifica si el valor recibido es flotante(o int)
  * \param str Array con la cadena a ser analizada
  * \return 1 si es númerico y 0 si no lo es
  *
  */
-int esNumericoFlotante(char str[]);
+int isFloat(char str[]);
 
 /**
  * \brief Verifica si el valor recibido es numérico
@@ -27,7 +27,7 @@ int esNumericoFlotante(char str[]);
  * \return 1 si es númerico y 0 si no lo es
  *
  */
-int esNumerico(char str[]);
+int isNumber(char str[]);
 
 /**
  * \brief Verifica si el valor recibido contiene solo letras
@@ -35,32 +35,10 @@ int esNumerico(char str[]);
  * \return 1 si contiene solo ' ' y letras y 0 si no lo es
  *
  */
-int esSoloLetras(char str[]);
+int onlyLetters(char str[]);
 
 
-/**
- * \brief Solicita un texto al usuario y lo devuelve
- * \param mensaje Es el mensaje a ser mostrado
- * \param input Array donde se cargará el texto ingresado
- * \return void
- */
-void getString(char mensaje[],char input[]);
 
-/**
- * \brief Solicita un texto al usuario y lo devuelve
- * \param mensaje Es el mensaje a ser mostrado
- * \param input Array donde se cargará el texto ingresado
- * \return 1 si el texto contiene solo letras
- */
-int getStringLetras(char mensaje[],char input[]);
-
-/**
- * \brief Solicita un texto numérico al usuario y lo devuelve
- * \param mensaje Es el mensaje a ser mostrado
- * \param input Array donde se cargará el texto ingresado
- * \return 1 si el texto contiene solo números
- */
-int getStringNumeros(char mensaje[],char input[]);
 
 /**
  * \brief Solicita un texto numérico al usuario y lo devuelve (acepta flotantes)
@@ -68,7 +46,7 @@ int getStringNumeros(char mensaje[],char input[]);
  * \param input Array donde se cargará el texto ingresado
  * \return 1 si el texto contiene solo números
  */
-int getStringNumerosFlotantes(char mensaje[],char input[]);
+int getFloatString(char mensaje[],char input[]);
 
 /**
  * \brief Solicita un numero entero al usuario y lo valida
@@ -88,6 +66,29 @@ int getValidInt(char requestMessage[],char errorMessage[], int lowLimit, int hiL
 void cleanStdin(void);
 
 /**
+ * \brief Pide un texto al usuario y lo devuelve
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param input Array donde se cargará el texto ingresado
+ * \return void
+ */
+void getString(char mensaje[],char input[]);
+
+/**
+ * \brief Pide un texto al usuario y lo devuelve
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param input Array donde se cargará el texto ingresado
+ * \return 1 si el texto contiene solo letras
+ */
+int getStringLetras(char mensaje[],char input[]);
+
+/**
+ * \brief Solicita un texto numérico al usuario y lo devuelve
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param input Array donde se cargará el texto ingresado
+ * \return 1 si el texto contiene solo números
+ */
+int getStringNumeros(char mensaje[],char input[]);
+/**
  * \brief Solicita un string
  * \param requestMessage Es el mensaje a ser mostrado para solicitar el dato
  * \param requestMessage Es el mensaje a ser mostrado en caso de error
@@ -95,6 +96,7 @@ void cleanStdin(void);
  * \return -
  *
  */
+
 void getValidString(char requestMessage[],char errorMessage[], char input[]);
 
 /**

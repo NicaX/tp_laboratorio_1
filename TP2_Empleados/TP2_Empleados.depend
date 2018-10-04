@@ -1,15 +1,32 @@
 # depslib dependency file v1.0
-1538451523 source:c:\users\leona\desktop\codeweas\tp2_empleados\main.c
+1538624406 source:c:\users\leona\desktop\codeweas\tp2_empleados2\main.c
 	<stdio.h>
 	<stdlib.h>
-	<string.h>
-	"ArrayEmployees.c"
-
-1538451559 c:\users\leona\desktop\codeweas\tp2_empleados\arrayemployees.c
-	<stdio.h>
-	<stdlib.h>
+	<conio.h>
 	<string.h>
 	"ArrayEmployees.h"
+	"ArrayEmployees.c"
 
-1538450624 c:\users\leona\desktop\codeweas\tp2_empleados\arrayemployees.h
+1538627650 c:\users\leona\desktop\codeweas\tp2_empleados2\arrayemployees.h
+	"utn.h"
+
+1538627650 c:\users\leona\desktop\codeweas\tp2_empleados2\utn.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
+1538626862 c:\users\leona\desktop\codeweas\tp2_empleados2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"utn.h"
+	"utn.c"
+
+1538627650 c:\users\leona\desktop\codeweas\tp2_empleados2\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
 
