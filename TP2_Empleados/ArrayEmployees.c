@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ArrayEmployees.h"
+#include "utn.h"
+#include "utn.c"
 
 void initEmployees(eEmpleado arrayEmpleados[],int cantidad)
 {
@@ -14,60 +16,77 @@ void initEmployees(eEmpleado arrayEmpleados[],int cantidad)
 
 void menuPrincipal()
 {
-    printf("\n*********Bienvenido**********\n\n");
-    printf("-------------------------\n");
-    printf("1.Dar de alta un empleado\n");
-    printf("2.Modificar datos de un empleado\n");
-    printf("3.Dar de baja un empleado\n");
-    printf("4.Mostrar los empleados\n");
-    printf("5.Calcular Salarios\n");
-    printf("6.Salir\n");
-    printf("-------------------------\n");
-    printf("\nIngrese una opcion: ");
+    printf("\n*********Bienvenido**********\n\n-------------------------\n1.Dar de alta un empleado\n2."
+           "Modificar datos de un empleado\n3.Dar de baja un empleado\n4.Mostrar los empleados\n5.Salir"
+           "\n-------------------------\n\n"
+           "Ingrese una opcion: ");
 }
 
 int addEmployees(eEmpleado arrayEmpleados[],int cantidad)//listo
 {
     int retorno=0;
-    char alta = 's';
-    do{
         system("cls");
         if(addOneEmployee(arrayEmpleados,buscarLibre(arrayEmpleados,cantidad),cantidad) == -1)
         {
+
             retorno=-1;
-            break;
         }
-        printf("\n\nQuiere seguir ingresando?(s/n) ");
         fflush(stdin);
-        scanf("%c",&alta);
-    }while(alta == 's');
     return retorno;
+}
+
+static int generateNextId ()
+{
+    static int id=0;
+
+    id ++;
+
+    return id;
 }
 
 int addOneEmployee(eEmpleado arrayEmpleados[],int vacio,int cantidad)//listo
 {
     int retorno = -1;
-    printf("\nIngrese el nombre del empleado: ");
-    fflush(stdin);
-    scanf("%s",arrayEmpleados[vacio].nombre);
-    printf("\nIngrese el apellido del empleado: ");
-    fflush(stdin);
-    scanf("%s",arrayEmpleados[vacio].apellido);
-    arrayEmpleados[vacio].id = vacio + 1;
-    printf("\nIngrese el salario del empleado: ");
-    fflush(stdin);
-    scanf("%f",&arrayEmpleados[vacio].salario);
-    printf("\nIngrese el sector del empleado: ");
-    fflush(stdin);
-    scanf("%d",&arrayEmpleados[vacio].sector);
-    arrayEmpleados[vacio].isEmpty = 0;
-    retorno = 0;
+    int auxId;
+    char auxName[51];
+    char auxLastName[51];
+    float auxSalary;
+    int auxSector;
+    if(retorno==-1)
+    {
+
+        auxId=generateNextId();
+
+        getValidString("\nIngrese nombre:\n", " Error, ingrese nombre nuevamente (solo letras):", auxName);
+
+        getValidString("\nIngrese apellido:\n", " Error, ingrese apellido nuevamente (solo letras):", auxLastName);
+
+        auxSalary=getValidFloat("\nIngrese salario:\n"," Error, ingrese salario nuevamente (solo numero flotante):\n", 0, 1000000);
+
+        auxSector=getValidInt("\nIngrese sector:\n"," Error, ingrese sector nuevamente (solo numero):\n", 1, 10);
+
+        arrayEmpleados[vacio].id=auxId;
+        strcpy(arrayEmpleados[vacio].nombre, auxName);
+        strcpy(arrayEmpleados[vacio].apellido, auxLastName);
+        arrayEmpleados[vacio].salario=auxSalary;
+        arrayEmpleados[vacio].sector=auxSector;
+        arrayEmpleados[vacio].isEmpty = 0;
+        retorno = 0;
+    }
+
+    if(retorno==0)
+    {
+        printf("\nEmpleado cargado con exito!\n");
+    }
+
+
     return retorno;
 }
 
 int buscarLibre(eEmpleado arrayEmpleados[],int cantidad)
 {
-    int i,retorno = -1;
+    int i;
+    int retorno = -1;
     for(i=0;i<cantidad;i++)
     {
         if(arrayEmpleados[i].isEmpty == 1)
@@ -81,98 +100,118 @@ int buscarLibre(eEmpleado arrayEmpleados[],int cantidad)
 
 
 
-void removeEmployee(eEmpleado arrayEmpleados[],int cantidad)//listo
+int removeEmployee(eEmpleado arrayEmpleados[],int cantidad)//listo
 {
     system("cls");
-    int id,indice;
+    int id;
+    int indice;
+    int retorno=-1;
     printEmployees(arrayEmpleados,cantidad);
-    printf("\n\nIngrese el id del empleado a dar de baja: ");
+    printf("\n\nIngrese el id del empleado que quiere dar de baja: ");
     fflush(stdin);
     scanf("%d",&id);
-    indice = buscarId(arrayEmpleados,cantidad,id);
-    arrayEmpleados[indice].isEmpty = 1;
-}
-
-void findEmployeeById(eEmpleado arrayEmpleados[],int cantidad)
-{
-    system("cls");
-    int indice,id,modificar;
-    printEmployees(arrayEmpleados,cantidad);
-    printf("\n\nIngrese el id del empleado a modificar: ");
-    fflush(stdin);
-    scanf("%d",&id);
-    indice = buscarId(arrayEmpleados,cantidad,id);
-    printf("1_Nombre: %s\n",arrayEmpleados[indice].nombre);
-    printf("2_Apellido: %s\n",arrayEmpleados[indice].apellido);
-    printf("3_Salario: %f\n",arrayEmpleados[indice].salario);
-    printf("4_Sector: %d\n",arrayEmpleados[indice].sector);
-    fflush(stdin);
-    scanf("%d",&modificar);
-    system("cls");
-    switch(modificar)
+    indice = findEmployeeById(arrayEmpleados,cantidad,id);
+    if(indice>=0)
     {
-        case 1:
-            modificarNombre(arrayEmpleados,indice);
-            break;
-        case 2:
-            modificarApellido(arrayEmpleados,indice);
-            break;
-        case 3:
-            modificarSalario(arrayEmpleados,indice);
-            break;
-        case 4:
-            modificarSector(arrayEmpleados,indice);
-            break;
-        default:
-            system("cls");
-            printf("Error: opcion no valida.");
-            break;
+        arrayEmpleados[indice].isEmpty = 1;
+        printf ("\n El empleado fue dado de baja con exito.\n");
+        system ("pause");
+        retorno=1;
     }
+    else
+    {
+        printf("Error!. Ese id no existe.\n");
+        system ("pause");
+    }
+    return retorno;
 }
 
-void modificarNombre(eEmpleado arrayEmpleados[],int indice)//listo
+int modificarEmployee(eEmpleado arrayEmpleados[],int cantidad)
 {
-    char auxiliar[31];
-    printf("Nombre nuevo: ");
+    system("cls");
+    int retorno=-1;
+    int indice;
+    int id;
+    int opcion;
+    char opcion2;
+    char auxNewName[31];
+    char auxNewLastName[31];
+    float auxNewSalary;
+    int auxNewSector;
+
+    printEmployees(arrayEmpleados,cantidad);
+    printf("\n\nIngrese el id del empleado a modificar: \n");
     fflush(stdin);
-    scanf("%s",auxiliar);
-    strcpy(arrayEmpleados[indice].nombre,auxiliar);
+    scanf("%d",&id);
+
+    indice = findEmployeeById(arrayEmpleados,cantidad,id);
+
+    if(arrayEmpleados != NULL)
+    {
+        if(indice>=0)
+        {
+            do{
+                system("cls");
+                printEmployees(arrayEmpleados, cantidad);
+
+                printf("Que campo quiere modificar?\n");
+                printf("1_Nombre: %s\n2_Apellido: %s\n3_Salario: %f\n4_Sector: %d\n",arrayEmpleados[indice].nombre,
+                arrayEmpleados[indice].apellido,arrayEmpleados[indice].salario,arrayEmpleados[indice].sector);
+                fflush(stdin);
+                scanf("%d",&opcion);
+                system("cls");
+
+                switch(opcion)
+                {
+                    case 1:
+                        printEmployees(arrayEmpleados, cantidad);
+                        getValidString(" Ingrese nuevo nombre: "," Error, ingrese nuevamente:", auxNewName);
+                        strcpy(arrayEmpleados[indice].nombre, auxNewName);
+                        break;
+                    case 2:
+                        printEmployees(arrayEmpleados, cantidad);
+                        getValidString(" Ingrese nuevo apellido: "," Error, ingrese nuevamente:", auxNewLastName);
+                        strcpy(arrayEmpleados[indice].apellido, auxNewLastName);
+                        break;
+                    case 3:
+                        printEmployees(arrayEmpleados, cantidad);
+                        auxNewSalary=getValidFloat(" Ingrese nuevo salario: \n"," Error, el salario no es valido.\n", 0, 1000000);
+                        arrayEmpleados[indice].salario=auxNewSalary;
+                        break;
+                    case 4:
+                        printEmployees(arrayEmpleados, cantidad);
+                        auxNewSector=getValidInt(" Ingrese nuevo sector: \n"," Error, el sector no es valido.\n", 0, 200);
+                        arrayEmpleados[indice].sector=auxNewSector;
+                        break;
+                    default:
+                        printf("\nError: opcion no valida, elija una opcion del 1 al 4.\n");
+                        system("pause");
+                        system("cls");
+                        break;
+                }
+                printf(" ¿Desea continuar? s/n \n :");
+                fflush(stdin);
+                scanf("%c",&opcion2);
+                system("pause");
+                system("cls");
+            }while(opcion2=='s' || opcion2=='S');
+        }
+        else if(indice<0)
+        {
+            printf("No existe ese id");
+            system("pause");
+        }
+        retorno=0;
+    }
+    return retorno;
 }
 
-void modificarApellido(eEmpleado arrayEmpleados[],int indice)//listo
-{
-    char auxiliar[31];
-    printf("Apelldio nuevo: ");
-    fflush(stdin);
-    scanf("%s",auxiliar);
-    strcpy(arrayEmpleados[indice].apellido,auxiliar);
-}
 
-void idMod(eEmpleado arrayEmpleados[],int indice)//listo
-{
-    printf("ID nuevo: ");
-    fflush(stdin);
-    scanf("%d",&arrayEmpleados[indice].id);
-}
-
-void modificarSector(eEmpleado arrayEmpleados[],int indice)//listo
-{
-    printf("Sector nuevo: ");
-    fflush(stdin);
-    scanf("%d",&arrayEmpleados[indice].sector);
-}
-
-void modificarSalario(eEmpleado arrayEmpleados[],int indice)//listo
-{
-    printf("Salario nuevo: ");
-    fflush(stdin);
-    scanf("%f",&arrayEmpleados[indice].salario);
-}
-
-int idUnico(eEmpleado arrayEmpleados[],int indice,int cantidad)
+int idEmployee(eEmpleado arrayEmpleados[],int indice,int cantidad)
 {
     int retorno = 0;
-    int i,comparacion;
+    int i;
+    int comparacion;
     printf("\nID: ");
     fflush(stdin);
     scanf("%d",&arrayEmpleados[indice].id);
@@ -192,29 +231,42 @@ int idUnico(eEmpleado arrayEmpleados[],int indice,int cantidad)
     return retorno;
 }
 
-void printEmployees(eEmpleado arrayEmpleados[],int cantidad)
+int printEmployees(eEmpleado arrayEmpleados[],int cantidad)
 {
     int i;
-    for(i=0;i<cantidad;i++)
+    int retorno=-1;
+    if(arrayEmpleados!=NULL)
     {
-        if(arrayEmpleados[i].isEmpty == 0)
+        printf("\n%5s %20s %20s %10s %3s \n", "ID","Nombre","Apellido","Sueldo","Sector");
+        for(i=0;i<cantidad;i++)
         {
-            printf("\nLos datos del empleado son: \n");
-            printf("Id: %d\t",arrayEmpleados[i].id);
-            printf("Nombre: %s\t",arrayEmpleados[i].nombre);
-            printf("Apellido: %s\n",arrayEmpleados[i].apellido);
-            printf("Salario: %f\t",arrayEmpleados[i].salario);
-            printf("Sector: %d\t",arrayEmpleados[i].sector);
+            if(arrayEmpleados[i].isEmpty == 0)
+            {
+                printEmployee(arrayEmpleados,i);
+                retorno=0;
+            }
         }
+
     }
+    return retorno;
 }
 
+int printEmployee(eEmpleado arrayEmpleados[], int cantidad)
+{
+    int retorno=-1;
+    if(arrayEmpleados!=NULL)
+    {
+        if(arrayEmpleados[cantidad].isEmpty == 0)
+        {
+            printf ("%5d %20s %20s %10.2f %3d\n", arrayEmpleados[cantidad].id, arrayEmpleados[cantidad].nombre, arrayEmpleados[cantidad].apellido, arrayEmpleados[cantidad].salario, arrayEmpleados[cantidad].sector);
+            retorno=0;
+        }
+    return retorno;
+}
 void sortEmployees(eEmpleado arrayEmpleados[],int cantidad)
 {
     int i;
     int comparacion;
-    int contador=0;
-    float totalSal,promedioSal;
     for(i=0;i<cantidad;i++)
     {
         if(arrayEmpleados[i].isEmpty == 0)
@@ -232,27 +284,8 @@ void sortEmployees(eEmpleado arrayEmpleados[],int cantidad)
             }
         }
     }
-    printEmployees(arrayEmpleados,cantidad);
-    for(i=0;i<cantidad;i++)
-    {
-        if(arrayEmpleados[i].isEmpty==0)
-        {
-            totalSal = totalSal + arrayEmpleados[i].salario;
-            contador++;
-        }
-    }
-    printf("\nSalario total: %f\n",totalSal);
-    promedioSal = totalSal / contador;
-    printf("Promedio de salarios: %f\n",promedioSal);
-    contador=0;
-    for(i=0;i<cantidad;i++)
-    {
-        if(arrayEmpleados[i].isEmpty==0 && arrayEmpleados[i].salario>promedioSal)
-        {
-            contador++;
-        }
-    }
-    printf("Cantidad de empleados que superan el salario promedio: %d\n",contador);
+
+
 }
 
 void intercambio(eEmpleado arrayEmpleados[],int indice1,int indice2)
@@ -263,7 +296,7 @@ void intercambio(eEmpleado arrayEmpleados[],int indice1,int indice2)
     arrayEmpleados[indice2] = aux;
 }
 
-int buscarId(eEmpleado arrayEmpleados[],int cantidad,int id)
+int findEmployeeById(eEmpleado arrayEmpleados[],int cantidad,int id)
 {
     int i,retorno=-1;
     for(i=0;i<cantidad;i++)
@@ -275,4 +308,36 @@ int buscarId(eEmpleado arrayEmpleados[],int cantidad,int id)
         }
     }
     return retorno;
+}
+
+void printSalarios(eEmpleado arrayEmpleados[], int cantidad)
+{
+    float promedio=0;
+    float total=0;
+    int contadorEmpleados=0;
+    int contadorSalarios=0;
+
+    for(int i=0; i<cantidad; i++)
+    {
+        if(arrayEmpleados[i].isEmpty == 0)
+        {
+            contadorEmpleados++;
+            total=total+arrayEmpleados[i].salario;
+        }
+    }
+    promedio= total/contadorEmpleados;
+
+    for(int i=0; i<cantidad; i++)
+    {
+        if(arrayEmpleados[i].isEmpty == 0)
+        {
+            if(arrayEmpleados[i].salario>promedio)
+            {
+                contadorSalarios++;
+            }
+        }
+    }
+    printf("\nEl total de los salarios es: %.2f\n", total);
+    printf("El promedio de los salarios es: %.2f\n", promedio);
+    printf("La cantidad de Empleados que superan el promedio: %d\n", contadorSalarios);
 }

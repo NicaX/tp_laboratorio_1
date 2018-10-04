@@ -25,6 +25,8 @@ void initEmployees(eEmpleado arrayEmpleados[],int cantidad);
  * \return void
  *
  */
+
+
 void menuPrincipal();
 
 /** \brief Da de alta empleados hasta que ocurra un error
@@ -62,7 +64,7 @@ int buscarLibre(eEmpleado arrayEmpleados[],int cantidad);
  * \return void
  *
  */
-void printEmployees(eEmpleado arrayEmpleados[],int cantidad);
+int printEmployees(eEmpleado arrayEmpleados[],int cantidad);
 
 /** \brief Imprime una lista ordenada por apellido y sector, y un breve informe sobre los salarios
  *
@@ -77,10 +79,10 @@ void sortEmployees(eEmpleado arrayEmpleados[],int cantidad);
  *
  * \param arrayEmpleados[] eEmpleado   Array de empleados
  * \param cantidad int  Cantidad de empleados del array
- * \return void
+ * \return int
  *
  */
-void removeEmployee(eEmpleado arrayEmpleados[],int cantidad);
+int removeEmployee(eEmpleado arrayEmpleados[],int cantidad);
 
 /** \brief  Busca empleados por id y permite modificar el resto de los parametros de la estructura
  *
@@ -89,7 +91,7 @@ void removeEmployee(eEmpleado arrayEmpleados[],int cantidad);
  * \return void
  *
  */
-void findEmployeeById(eEmpleado arrayEmpleados[],int cantidad);
+int modificarEmployee(eEmpleado arrayEmpleados[],int cantidad);
 
 /** \brief  Modifica el nombre del empleado mediante su indice
  *
@@ -127,14 +129,6 @@ void modificarSector(eEmpleado arrayEmpleados[],int indice);
  */
 void modificarSalario(eEmpleado arrayEmpleados[],int indice);
 
-/** \brief  Modifica el id del empleado mediante su indice
- *
- * \param arrayEmpleados[] eEmpleado   Array de empleados
- * \param cantidad int  Cantidad de empleados del array
- * \return void
- *
- */
-void idMod(eEmpleado arrayEmpleados[],int indice);
 
 /** \brief  Da de alta la id del empleado con la condicion de que no se repita
  *
@@ -144,7 +138,7 @@ void idMod(eEmpleado arrayEmpleados[],int indice);
  * \return int Retorna 0 si no hay problemas y -1 si la id ya se encuentra en uso
  *
  */
-int idUnico(eEmpleado arrayEmpleados[],int indice,int cantidad);
+int idEmployee(eEmpleado arrayEmpleados[],int indice,int cantidad);
 
 /** \brief  Intercambia el indice de dos empleados dentro del array
  *
@@ -166,6 +160,9 @@ void intercambio(eEmpleado arrayEmpleados[],int indice1,int indice2);
  * \return int  Retorna -1 en caso de error y el indice correspondiente al id en caso exitoso
  *
  */
-int buscarId(eEmpleado arrayEmpleados[],int cantidad,int id);
+int findEmployeeById(eEmpleado arrayEmpleados[],int cantidad,int id);
 
+
+
+void printSalarios(eEmpleado arrayEmpleados[], int cantidad);
 #endif // ARRAYEMPLOYEES_H_INCLUDED
