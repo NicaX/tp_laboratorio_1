@@ -31,7 +31,7 @@ int employee_buscarPorId(LinkedList* pArrayEmployee, int idEmployee);
 int employee_borrarEmployee(LinkedList* pArrayEmployee);
 
 void employee_mostrarEmployee(LinkedList* pArrayListEmployee);
-int employee_ordenarPorNombre(void* thisA,void* thisB);
+int employee_ordenarPorName(void* thisA,void* thisB);
 
 int employee_guardarDatosenTexto(LinkedList* pArrayEmployee, char* path);
 int employee_guardarDatosenBinario(LinkedList* pArrayEmployee, char* path);

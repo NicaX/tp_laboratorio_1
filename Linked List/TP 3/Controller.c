@@ -9,7 +9,7 @@
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 {
@@ -19,16 +19,12 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     pArchivo = fopen(path,"r");
     if(!parser_EmployeeFromText(pArchivo, pArrayListEmployee))
     {
-         printf("           ----------------------------------------------               \n");
-        printf("           LA CARGA DE DATOS DE TIPO TEXTO SE REALIZO CON EXITO          \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Carga Exitosa!!!\n");
         retorno = 0;
     }
     else
     {
-        printf("             ----------------------------------------------               \n");
-        printf("                NO SE ENCONTRO UN ARCHIVO DE TEXTO                      \n");
-        printf("            ----------------------------------------------               \n");
+        printf("No se encontro un archivo de texto");
     }
     fclose(pArchivo);
     system("pause");
@@ -37,7 +33,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
@@ -46,25 +42,21 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     pFile = fopen(path, "rb");
     if(pFile != NULL && parser_EmployeeFromBinary(pFile, pArrayListEmployee) == 0)
     {
-        printf("             ----------------------------------------------              \n");
-        printf("                SE CARGARON LOS DATOS CORRECTAMENTE                      \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Datos Cargados!\n");
         retorno = 0;
     }
     else
     {
-        printf("            ----------------------------------------------              \n");
-        printf("                NO SE PUDIERON CARGAR LOS DATOS                          \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Error!  No se pudieron cargar los datos!\n");
     }
     fclose(pFile);
     return retorno;
 }
 
-/** \brief Alta de empleados
+/** \brief Da de alta empleados
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
@@ -72,21 +64,17 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(employee_cargarEmployee(pArrayListEmployee) == 0)
     {
-         printf("            ----------------------------------------------              \n");
-        printf("                EL NUEVO EMPLEADO SE REGISTRO CORRECTAMENTE              \n");
-        printf("            ----------------------------------------------               \n");
+         printf("Empleado cargado exitosamente\n");
         retorno = 0;
     }
     else
     {
-        printf("            ----------------------------------------------              \n");
-        printf("              EL NUEVO EMPLEADO NO SE PUDO REGISTRAR CORRECTAMENTE              \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Error!  No se pudo cargar el empleado!\n");
     }
     return retorno;
 }
 
-/** \brief Modificar datos de empleado
+/** \brief Modificar  los datos de un empleado por Id
  * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
@@ -97,48 +85,40 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     if(employee_modificarEmployee(pArrayListEmployee) == 0)
     {
         system("cls");
-        printf("            ----------------------------------------------              \n");
-        printf("                EL EMPLEADO HA SIDO MODIFICADO CON EXITO               \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Modificacion Exitosa!\n");
         retorno = 0;
     }
     else
     {
-        printf("            ----------------------------------------------              \n");
-        printf("                    EL EMPLEADO NO SE PUDO MODIFICAR                        \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Error!  No se pudo modificar el empleado\n");
     }
     return retorno;
 }
 
-/** \brief Baja de empleado
+/** \brief Da de baja un empleado por Id
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
     int retorno =- 1;
     if(employee_borrarEmployee(pArrayListEmployee) == 0)
     {
-        printf("            ----------------------------------------------              \n");
-        printf("                EL EMPLEADO SE BORRO CON EXITO                           \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Eliminacion Exitosa!");
         retorno=0;
     }
     else
     {
-        printf("            ----------------------------------------------              \n");
-        printf("                EL EMPLEADO NO SE PUEDO ELIMINAR                         \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Error!  No se pudo dar de baja el empleado!\n");
     }
     return retorno;
 }
 
-/** \brief Listar empleados
+/** \brief Muestra los empleados
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
@@ -168,12 +148,9 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
             employee_getSalary(auxPunteroEmpleado,&sueldo);
             employee_getHoursWorked(auxPunteroEmpleado,&horasTrabajadas);
 
-            printf("\n=====================\n");
-            printf("\nID: %d",id);
-            printf("\nNombre: %s",nombre);
-            printf("\nSueldo: %d",sueldo);
-            printf("\nHoras trabajadas: %d",horasTrabajadas);
-            printf("\n=====================\n");
+            printf("\n-----------------");
+            printf("\nID: %d\nNombre: %s\nSueldo: %d\nHoras trabajadas: %d",id,nombre,sueldo,horasTrabajadas);
+            printf("\n-----------------\n");
             }
             else
             {
@@ -183,21 +160,20 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
             employee_getSalary(auxPunteroEmpleado,&sueldo);
             employee_getHoursWorked(auxPunteroEmpleado,&horasTrabajadas);
 
-            printf("\n=====================\n");
+            printf("\n-----------------\n");
             printf("\nID: %d",id);
             printf("\nNombre: %s",nombre);
             printf("\nSueldo: %d",sueldo);
             printf("\nHoras trabajadas: %d",horasTrabajadas);
-            printf("\n=====================\n");
+            printf("\n-----------------\n");
             printf("\n");
 
 
             }
 
         }
-        printf("\n====================================\n");
-        printf("\n LA CANTIDAD DE EMPLEADO ES: %d. \n" , size);
-        printf("\n====================================\n");
+
+        printf("\nCantidad de Empleados: %d. \n" , size);
     }
     system("pause");
     return retorno;
@@ -208,7 +184,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 /** \brief Ordenar empleados
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
@@ -217,17 +193,13 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee != NULL)
     {
-        ll_sort(pArrayListEmployee , employee_ordenarPorName(),1);
-        printf("            ----------------------------------------------              \n");
-        printf("                lOS EMPLEADO HAN SIDO ORDENADOS                       \n");
-        printf("            ----------------------------------------------               \n");
+        ll_sort(pArrayListEmployee , employee_ordenarPorName,1);
+        printf("\nLos empleados fueron ordenados por nombre exitosamente!!\n");
         retorno = 0;
     }
     else
     {
-        printf("            ----------------------------------------------              \n");
-        printf("                NO SE PUDO ORDENAR LOS EMPLEADO                        \n");
-        printf("            ----------------------------------------------               \n");
+        printf("Error!  No se pudo ordenar!\n");
     }
     return retorno;
 }
@@ -236,23 +208,19 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
     if(employee_guardarDatosenTexto(pArrayListEmployee, path) == 0)
     {
-        printf("            ----------------------------------------------        \n");
-        printf("               LOS DATOS DE HAN GUARDADO CORRECTAMENTE            \n");
-        printf("            ----------------------------------------------         \n");
+        printf("Datos guardados Exitosamente!\n");
         retorno = 0;
     }
     else
     {
-         printf("            ----------------------------------------------        \n");
-        printf("               LOS DATOS NO SE HAN GUARDADO CORRECTAMENTE            \n");
-        printf("            ----------------------------------------------         \n");
+         printf("Error!  No se pudieron guardar los datos!\n");
     }
     return retorno;
 }
@@ -260,23 +228,19 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorno
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
     if(employee_guardarDatosenBinario(pArrayListEmployee, path)==0)
     {
-        printf("            ----------------------------------------------        \n");
-        printf("               LOS DATOS DE HAN GUARDADO CORRECTAMENTE            \n");
-        printf("            ----------------------------------------------         \n");
+        printf("Los datos se guardaron correctamente\n");
         retorno = 0;
     }
     else
     {
-        printf("            ----------------------------------------------        \n");
-        printf("               LOS DATOS NO SE HAN GUARDADO CORRECTAMENTE            \n");
-        printf("            ----------------------------------------------         \n");
+        printf("Error! No se pudieron guardar los datos!\n");
     }
     return retorno;
 }

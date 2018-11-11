@@ -118,9 +118,7 @@ static int isValidHoursWorked(char* HoursWorked)
     int retorno = -1;
     if(esEntero(HoursWorked) == -1)
     {
-        printf("   ----------------------------------------------   \n");
-        printf("           lAS HORAS TRABAJADAS NO SON VALIDAS       \n");
-        printf("   ----------------------------------------------    \n");
+        printf("Error!  Hora invalida");
     }
     else
     {
@@ -162,9 +160,7 @@ static int isValidSalary(char* Salary)
     int retorno = -1;
     if(esEntero(Salary) == -1)
     {
-        printf("   ----------------------------------------------   \n");
-        printf("            EL Salary NO ES VALIDO                  \n");
-        printf("   ----------------------------------------------    \n");
+        printf("Error! Sueldo erroneo");
     }
     else
     {
@@ -216,9 +212,7 @@ static int isValidId(char* id)
     int retorno = -1;
     if(EnteroConGuiones(id) == -1)
     {
-        printf("   ----------------------------------------------   \n");
-        printf("             EL ID ES INVALIDO                       \n");
-        printf("   ----------------------------------------------    \n");
+        printf("El id es invalido!");
     }
     else
     {
